@@ -1,7 +1,7 @@
 NAME			= containers_test
 
 # MY FILES TEST
-FILES			= vector_test.cpp iterator_test.cpp
+FILES			= vector_test.cpp iterator_test.cpp metafunctions_test.cpp map_test.cpp
 INC_FILES		= .
 INC_PATH		= .
 INC				= $(addprefix ${INC_PATH}/, ${INC_FILES})
@@ -24,7 +24,7 @@ GTEST_LIB		= $(addprefix build/lib/, libgtest.a libgtest_main.a)
 # COMMAND LINE
 CXX				= clang++
 RM				= rm -rf
-FLAGS			= -Wall -Wextra  -Werror --std=c++11
+FLAGS			= -Wall -Wextra  -Werror --std=c++11 -fsanitize=address -g3
 AR				= ar rcs
 
 
