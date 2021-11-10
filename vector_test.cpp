@@ -15,12 +15,26 @@ public:
 	std::vector<int> vector;
 };
 
+TEST(MyVector, ConstructorTestWithIterators) {
+	int myints[] = {1, 2, 3, 4};
+	ft::vector<int> john(myints, myints + 5); // THIS DOESN'T WORKS
 
-//TEST(MyVector, DefaultConstructorCreatesNoElements) {
-//	std::vector<int> realVector(4, 42);
+//	int myints[] = {1, 2, 3, 4};
+// 	ft::vector<int> john(myints, myints + 5); // THIS DOESN'T WORKS
+//	ft::vector<int>::iterator it = john.begin();
+//	ft::vector<int>::iterator ite = john.end();
+//	ite--;
+//	EXPECT_EQ((*it),1);
+//	EXPECT_EQ((*ie),4);
+//
 //	ft::vector<int> myvector2(4, 42);
+//	it = myvector2.begin();
+//	EXPECT_EQ(*it, 42);
+//
 //	std::deque<int> Deque(2, 4);
-//	std::vector<int> vector(Deque.begin(), Deque.end());
-//	std::cout << *vector.begin() << std::endl;
-//	EXPECT_TRUE(abigvector.empty());
-//}
+//	ft::vector<int> ftvector(Deque.begin(), Deque.end());
+//	std::cout << *ftvector.begin() << std::endl;
+//
+//	ft::vector<int> newVector();
+//	EXPECT_TRUE(newVector.empty());
+}

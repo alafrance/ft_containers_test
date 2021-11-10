@@ -4,34 +4,72 @@
 
 #include <gtest/gtest.h>
 #include "../ft_containers/metafunctions/is_integral.hpp"
+#include "../ft_containers/vector.hpp"
 
 class MetaFunctions: public ::testing::Test{
 public:
-	MetaFunctions(): testIntegral(false) {}
-	bool testIntegral;
 	class A {};
 	template<typename T>
 	void testIntegralFundamentalsTypes(T a) {
 		(void)a;
-		testIntegral = ft::is_integral<T>::value_type;
-		EXPECT_EQ(testIntegral, true);
+		bool b = ft::is_integral<T>::value;
+		EXPECT_EQ(b, true);
 	}
 };
 
-
-TEST(MetaFunctionsWitoutFixture, TestEnableIfWithSimplesConditions) {
+TEST(MetaFunctionsWithoutFixture, TestEnableIfWithSimplesConditions) {
 	class A {};
-	ft::enable_if<ft::is_integral<int>::value_type, int>::type a;
+	ft::enable_if<ft::is_integral<int>::value, int>::type a;
 	(void)a;
-	ft::enable_if<!ft::is_integral<A>::value_type, int>::type c;
+	ft::enable_if<!ft::is_integral<A>::value, int>::type c;
 	(void)c;
+	ft::enable_if<!ft::is_integral<A*>::value, int>::type d;
+	(void)d;
+	ft::enable_if<!ft::is_integral<int*>::value, int>::type e;
+	(void)e;
 	SUCCEED();
+}
+
+
+bool fctEqual(int i, int j) {
+	return (i == j);
+}
+
+TEST(MetaFunctionsWithoutFixture, EqualFunctionsWithIteratorAndString) {
+	int myints[] = {20, 40, 60, 80, 100};
+	int myints2[] = {20, 40, 60, 82, 100};
+
+	std::vector<int> myvector(myints, myints + 5);
+
+	EXPECT_EQ(ft::equal(myvector.begin(), myvector.end(), myints), true);
+	EXPECT_EQ(ft::equal(myvector.begin(), myvector.end(), myints, fctEqual), true);
+	EXPECT_EQ(ft::equal(myvector.begin(), myvector.end(), myints2), false);
+}
+
+bool mycomp (char c1, char c2) { return std::tolower(c1)<std::tolower(c2); }
+
+TEST(MetaFunctionsWithoutFixture, LexicographicalCompareTestCplusplusreference) {
+	char foo[]="Apple";
+	char bar[]="apartment";
+
+	EXPECT_EQ(ft::lexicographical_compare(foo,foo+5,bar,bar+9), true);
+	EXPECT_EQ(ft::lexicographical_compare(foo,foo+5,bar,bar+9,mycomp), false);
+
+	char foo2[]="Apple";
+	char bar2[]="apple";
+	EXPECT_EQ(ft::lexicographical_compare(foo2,foo2+5,bar2,bar2+5), true);
+	EXPECT_EQ(ft::lexicographical_compare(foo2,foo2+5,bar2,bar2+5,mycomp), false);
+
+	char foo3[]="geeksforgeeks";
+	char bar3[]="Indeed";
+	EXPECT_EQ(ft::lexicographical_compare(foo3,foo3+5,bar3,bar3+3), false); // false
+	EXPECT_EQ(ft::lexicographical_compare(foo3,foo3+5,bar3,bar3+3,mycomp), true); // false
 }
 
 TEST_F(MetaFunctions, TestValueTypeIsTrueWithFundamentalTypes) {
 	unsigned char a = 0;
 	testIntegralFundamentalsTypes(a);
-	bool b = 0;
+	bool b = false;
 	testIntegralFundamentalsTypes(b);
 	char c = 0;
 	testIntegralFundamentalsTypes(c);

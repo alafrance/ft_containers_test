@@ -2,7 +2,6 @@
 // Created by Alexis Lafrance on 11/9/21.
 //
 
-
 #include <gtest/gtest.h>
 #include "../ft_containers/pair.hpp"
 
@@ -29,3 +28,17 @@ TEST(PairTest, OperatorEqual) {
 	EXPECT_EQ(homeplanet.first, "Earth");
 	EXPECT_EQ(homeplanet.second, 6371);
 }
+
+TEST(PairTest, RelationalOperator) {
+	ft::pair<int, char> foo(10, 'z');
+	ft::pair<int, char> bar(90, 'a');
+
+	EXPECT_EQ((foo == bar), false);
+	EXPECT_EQ((foo == foo), true);
+	EXPECT_EQ((foo != foo), false);
+	EXPECT_EQ((foo > bar), false);
+	EXPECT_EQ((foo < bar), true);
+	EXPECT_EQ((foo >= bar), false);
+	EXPECT_EQ((foo <= bar), true);
+}
+
