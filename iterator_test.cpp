@@ -10,22 +10,25 @@
 
 using namespace ::testing;
 
-//
-//TEST(bidirectional_iterator, IS_CANONICAL_FORM) {
-//	ft::vector<int>::iterator it;
-//	ft::vector<int>::iterator it2(it);
-//	ft::vector<int>::iterator it3;
-//	EXPECT_EQ(typeid(it), typeid(it2));
-//	EXPECT_EQ(typeid(it3), typeid(it));
-//}
-//
-//TEST(bidirectional_iterator, iterator_begin_end_works) {
-//	ft::vector<char> myvector("hola amigo");
-//	ft::vector<char>::iterator it = myvector.begin();
-//	EXPECT_EQ(*it, 'h');
 
-//	it++;
-//	EXPECT_EQ(*it, "o");
-//}
-
-
+TEST(MyVector, IteratorBeginAndEndTesting) {
+	ft::vector<int> hello(1, 100);
+	hello.push_back(200);
+	hello.push_back(300);
+	hello.push_back(400);
+	ft::vector<int>::iterator it = hello.begin();
+	ft::vector<int>::iterator ite = hello.end();
+	ft::vector<int>::iterator itcp(it);
+//	EXPECT_TRUE(it ==  itcp);
+//	itcp = ite;
+//	EXPECT_TRUE(itcp == ite);
+	EXPECT_EQ(*it, 100);
+	EXPECT_EQ(*(++it), 200);
+	EXPECT_EQ(*(--it), 100);
+	ft::vector<int>::iterator it2 = it + 2;
+	EXPECT_EQ(*it2, 300);
+//	itcp = it;
+	it += 2;
+	EXPECT_EQ(*it, 300);
+//	EXPECT_EQ(it - itcp, 100);
+}
