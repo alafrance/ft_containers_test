@@ -1,7 +1,7 @@
 NAME			= containers_test
 
 # MY FILES TEST
-FILES			= vector_test.cpp iterator_test.cpp metafunctions_test.cpp map_test.cpp
+FILES			= vector_test.cpp iterator_test.cpp metafunctions_test.cpp map_test.cpp stack_test.cpp
 INC_FILES		= .
 INC_PATH		= .
 INC				= $(addprefix ${INC_PATH}/, ${INC_FILES})
